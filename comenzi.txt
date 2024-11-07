@@ -1,0 +1,2 @@
+g++ main.cpp Mentorat.cpp -o mentorat_program.exe
+.\mentorat_program.exe
