@@ -4,20 +4,17 @@ int main()
  {
     Mentorat mentorat; 
 
-    // Adăugăm studenți
-    mentorat.addStudent(Student("Cosminaaa Casiu", 1));
-    mentorat.addStudent(Student("Serban Denisa", 2));
-    mentorat.addStudent(Student("Maria Alexandra", 3));
-    mentorat.addStudent(Student("Daniela Andreea", 4)); 
+    mentorat.addStudent(Student("Cosminaaa Casiu", 1344, "POO"));
+    mentorat.addStudent(Student("Serban Denisa", 6543, "ASD"));
+    mentorat.addStudent(Student("Andrei Mihai", 12342, "ASD"));
+    mentorat.addStudent(Student("Maria Alexandra", 3454, "POO"));
+    mentorat.addStudent(Student("Daniela Andreea", 4565, "ASD")); 
+    mentorat.addStudent(Student("Valentin Cristian", 7543, "POO"));
 
-    // Adăugăm mentori
-    mentorat.addMentor(Mentor("Mentor POO", 101, 2));
-    mentorat.addMentor(Mentor("Mentor ASD", 102, 2)); 
+    mentorat.addMentor(Mentor("Mentor POO", 101, 2, "POO"));
+    mentorat.addMentor(Mentor("Mentor ASD", 102, 7, "ASD")); 
 
-    // Alocăm studenții 
     mentorat.allocateStudents(); 
-
-    // Afișăm alocările
     mentorat.displayAllocations(); 
 
     return 0;

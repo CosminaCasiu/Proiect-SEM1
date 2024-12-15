@@ -1,21 +1,23 @@
 #include "Mentorat.h"
 
-Student::Student(string name, int id) : name(name), id(id) {}
+Student::Student(string name, int id, string subject) : name(name), id(id), subject(subject) {}
 
 string Student::getName() const { return name; }
 int Student::getId() const { return id; }
+string Student::getSubject() const { return subject; }
 
-
-Mentor::Mentor(string name, int id, int maxStudents) : name(name), id(id), maxStudents(maxStudents) {}
+Mentor::Mentor(string name, int id, int maxStudents, string subject) 
+    : name(name), id(id), maxStudents(maxStudents), subject(subject) {}
 
 string Mentor::getName() const { return name; }
 int Mentor::getId() const { return id; }
 int Mentor::getMaxStudents() const { return maxStudents; }
 int Mentor::getCurrentStudentCount() const { return students.size(); }
+string Mentor::getSubject() const { return subject; }
 
 bool Mentor::addStudent(const Student& student) 
 {
-    if (students.size() < maxStudents) {
+    if (students.size() < maxStudents && student.getSubject() == subject) {
         students.push_back(student);
         return true;
     }
@@ -32,7 +34,6 @@ void Mentor::displayStudents() const
     cout << endl;
 }
 
-
 void Mentorat::addStudent(const Student& student) 
 {
     students.push_back(student);
@@ -45,17 +46,20 @@ void Mentorat::addMentor(const Mentor& mentor)
 
 void Mentorat::allocateStudents() 
 {
-    int mentorIndex = 0;
     for (const auto& student : students) 
     {
-        while (mentorIndex < mentors.size() && !mentors[mentorIndex].addStudent(student)) 
+        bool allocated = false;
+        for (auto& mentor : mentors) 
         {
-            mentorIndex++;
+            if (mentor.addStudent(student)) 
+            {
+                allocated = true;
+                break;
+            }
         }
-        if (mentorIndex >= mentors.size()) 
+        if (!allocated) 
         {
-            cout << "Nu sunt suficienți mentori pentru toți studenții." << endl;
-            break;
+            cout << "Studentul " << student.getName() << " (ID: " << student.getId() << ") nu a fost alocat niciunui mentor." << endl;
         }
     }
 }
